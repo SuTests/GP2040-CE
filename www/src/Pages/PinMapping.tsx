@@ -49,6 +49,38 @@ type OptionType = {
 	customDpadMask: number;
 };
 
+// GPIO坐标映射 - 这里先设置示例坐标，你可以后续修改为正确的值
+const GPIO_POSITIONS = {
+	pin00: { x: 100, y: 50 },   // GPIO0
+	pin01: { x: 200, y: 50 },   // GPIO1
+	pin02: { x: 300, y: 50 },   // GPIO2
+	pin03: { x: 400, y: 50 },   // GPIO3
+	pin04: { x: 500, y: 50 },   // GPIO4
+	pin05: { x: 600, y: 50 },   // GPIO5
+	pin06: { x: 100, y: 120 },  // GPIO6
+	pin07: { x: 200, y: 120 },  // GPIO7
+	pin08: { x: 300, y: 120 },  // GPIO8
+	pin09: { x: 400, y: 120 },  // GPIO9
+	pin10: { x: 500, y: 120 },  // GPIO10
+	pin11: { x: 600, y: 120 },  // GPIO11
+	pin12: { x: 100, y: 190 },  // GPIO12
+	pin13: { x: 200, y: 190 },  // GPIO13
+	pin14: { x: 300, y: 190 },  // GPIO14
+	pin15: { x: 400, y: 190 },  // GPIO15
+	pin16: { x: 500, y: 190 },  // GPIO16
+	pin17: { x: 600, y: 190 },  // GPIO17
+	pin18: { x: 100, y: 260 },  // GPIO18
+	pin19: { x: 200, y: 260 },  // GPIO19
+	pin20: { x: 300, y: 260 },  // GPIO20
+	pin21: { x: 400, y: 260 },  // GPIO21
+	pin22: { x: 500, y: 260 },  // GPIO22
+	pin23: { x: 600, y: 260 },  // GPIO23
+	pin24: { x: 100, y: 330 },  // GPIO24
+	pin25: { x: 200, y: 330 },  // GPIO25
+	pin26: { x: 300, y: 330 },  // GPIO26
+	pin27: { x: 400, y: 330 },  // GPIO27
+};
+
 const disabledOptions = [
 	BUTTON_ACTIONS.RESERVED,
 	BUTTON_ACTIONS.ASSIGNED_TO_ADDON,
@@ -246,24 +278,38 @@ const PinSelectList = memo(function PinSelectList({
 		},
 		[buttonNames],
 	);
+
 	return (
-		<div className="pin-grid gap-3 mt-2">
-			{Object.entries(pins).map(([pin, pinData], index) => (
-				<div key={`select-${index}`} className="d-flex align-items-center">
-					<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
-						<label>GP{index}</label>
+		<div className="pin-grid position-relative" style={{ minHeight: '500px' }}>
+			{Object.entries(pins).map(([pin, pinData], index) => {
+				const position = GPIO_POSITIONS[pin as keyof typeof GPIO_POSITIONS] || { x: 0, y: 0 };
+				
+				return (
+					<div
+						key={`select-${index}`}
+						className="position-absolute d-flex align-items-center"
+						style={{
+							left: `${position.x}px`,
+							top: `${position.y}px`,
+							width: '300px', // 固定宽度，确保所有编辑框大小一致
+						}}
+					>
+						<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
+							<label>GP{index}</label>
+						</div>
+						<CustomSelect
+							isClearable
+							isMulti={!isDisabled(pinData.action)}
+							options={groupedOptions}
+							isDisabled={isDisabled(pinData.action)}
+							getOptionLabel={getOptionLabel}
+							onChange={onChange(pin)}
+							value={getMultiValue(pinData)}
+							className="flex-grow-1"
+						/>
 					</div>
-					<CustomSelect
-						isClearable
-						isMulti={!isDisabled(pinData.action)}
-						options={groupedOptions}
-						isDisabled={isDisabled(pinData.action)}
-						getOptionLabel={getOptionLabel}
-						onChange={onChange(pin)}
-						value={getMultiValue(pinData)}
-					/>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 });

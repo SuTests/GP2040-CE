@@ -14,7 +14,6 @@ on:
         required: false
         type: choice
         options:
-          - ""
           - WaveshareZero
 
 env:

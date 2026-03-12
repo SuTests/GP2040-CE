@@ -249,47 +249,62 @@ const PinSelectList = memo(function PinSelectList({
 
 	// 自定义按钮坐标配置
 	const buttonPositions = {
-		pin00: { top: '10%', left: '20%' },
-		pin01: { top: '20%', left: '30%' },
-		pin02: { top: '30%', left: '40%' },
-		pin03: { top: '40%', left: '50%' },
-		pin04: { top: '50%', left: '60%' },
-		pin05: { top: '60%', left: '70%' },
-		pin06: { top: '70%', left: '80%' },
-		pin07: { top: '80%', left: '90%' },
-		pin08: { top: '10%', left: '80%' },
-		pin09: { top: '20%', left: '70%' },
-		pin10: { top: '30%', left: '60%' },
-		pin11: { top: '40%', left: '50%' },
-		pin12: { top: '50%', left: '40%' },
-		pin13: { top: '60%', left: '30%' },
-		pin14: { top: '70%', left: '20%' },
-		pin15: { top: '80%', left: '10%' },
+		pin01: { top: '50%', left: '70%' },
+		pin02: { top: '60%', left: '70%' },
+		pin03: { top: '50%', left: '60%' },
+		pin04: { top: '60%', left: '60%' },
+		pin05: { top: '50%', left: '50%' },
+		pin06: { top: '60%', left: '50%' },
+		pin07: { top: '50%', left: '40%' },
+		pin08: { top: '60%', left: '40%' },
+
+		pin09: { top: '70%', left: '50%' },
+		pin10: { top: '70%', left: '40%' },
+		pin11: { top: '70%', left: '30%' },
+
+		pin12: { top: '50%', left: '30%' },
+		pin13: { top: '50%', left: '20%' },
+		pin14: { top: '50%', left: '10%' },
+		pin15: { top: '50%', left: '00%' },
+		
+		pin00: { top: '40%', left: '40%' },
+		pin26: { top: '40%', left: '30%' },
+		pin27: { top: '40%', left: '20%' },
+		pin28: { top: '40%', left: '10%' },
+		pin29: { top: '40%', left: '00%' },
 	};
+
+	// 需要显示的pin列表
+	const visiblePins = ['pin00', 'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06', 'pin07', 'pin08', 'pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin26', 'pin27', 'pin28', 'pin29'];
 
 	return (
 		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '600px' }}>
-			{Object.entries(pins).map(([pin, pinData], index) => (
-				<div key={`select-${index}`} className="d-flex align-items-center" style={{ 
-					position: 'absolute', 
-					top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
-					left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
-					transform: 'translate(-50%, -50%)'
-				}}>
-					<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
-						<label>GP{index}</label>
+			{Object.entries(pins).map(([pin, pinData], index) => {
+				// 只显示需要的pin编辑框
+				if (!visiblePins.includes(pin)) return null;
+				
+				return (
+					<div key={`select-${index}`} className="d-flex align-items-center" style={{ 
+						position: 'absolute', 
+						top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
+						left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
+						transform: 'translate(-50%, -50%)'
+					}}>
+						<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
+							<label>GP{index}</label>
+						</div>
+						<CustomSelect
+							isClearable
+							isMulti={!isDisabled(pinData.action)}
+							options={groupedOptions}
+							isDisabled={isDisabled(pinData.action)}
+							getOptionLabel={getOptionLabel}
+							onChange={onChange(pin)}
+							value={getMultiValue(pinData)}
+						/>
 					</div>
-					<CustomSelect
-						isClearable
-						isMulti={!isDisabled(pinData.action)}
-						options={groupedOptions}
-						isDisabled={isDisabled(pinData.action)}
-						getOptionLabel={getOptionLabel}
-						onChange={onChange(pin)}
-						value={getMultiValue(pinData)}
-					/>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 });

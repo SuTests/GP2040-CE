@@ -49,33 +49,6 @@ type OptionType = {
 	customDpadMask: number;
 };
 
-// GPIO坐标映射 - 这里先设置示例坐标，你可以后续修改为正确的值
-const GPIO_POSITIONS = {
-	pin01: { x: 700, y: 100 },   // GPIO1
-	pin02: { x: 700, y: 200 },   // GPIO2
-	pin03: { x: 600, y: 100 },   // GPIO3
-	pin04: { x: 600, y: 200 },   // GPIO4
-	pin05: { x: 500, y: 100 },   // GPIO5
-	pin06: { x: 500, y: 200 },  // GPIO6
-	pin07: { x: 400, y: 100 },  // GPIO7
-	pin08: { x: 400, y: 200 },  // GPIO8
-
-	pin09: { x: 450, y: 300 },  // GPIO9
-	pin10: { x: 350, y: 300 },  // GPIO10
-	pin11: { x: 250, y: 300 },  // GPIO11
-
-	pin12: { x: 300, y: 100 },  // GPIO12
-	pin13: { x: 200, y: 100 },  // GPIO13
-	pin14: { x: 100, y: 100 },  // GPIO14
-	pin15: { x: 0, y: 100 },	// GPIO15
-	
-	pin00: { x: 400, y: 0 },   // GPIO0
-	pin26: { x: 300, y: 0 },  // GPIO26
-	pin27: { x: 200, y: 0 },  // GPIO27
-	pin28: { x: 100, y: 0 },  // GPIO28
-	pin29: { x: 0, y: 0 },  // GPIO29
-};
-
 const disabledOptions = [
 	BUTTON_ACTIONS.RESERVED,
 	BUTTON_ACTIONS.ASSIGNED_TO_ADDON,
@@ -242,7 +215,7 @@ const PinSelectList = memo(function PinSelectList({
 										option.type === 'customDpadMask'
 											? masks.customDpadMask ^ option.customDpadMask
 											: masks.customDpadMask,
-								}),
+									}),
 								{
 									action: BUTTON_ACTIONS.CUSTOM_BUTTON_COMBO,
 									customButtonMask: 0,
@@ -274,37 +247,49 @@ const PinSelectList = memo(function PinSelectList({
 		[buttonNames],
 	);
 
+	// 自定义按钮坐标配置
+	const buttonPositions = {
+		pin00: { top: '10%', left: '20%' },
+		pin01: { top: '20%', left: '30%' },
+		pin02: { top: '30%', left: '40%' },
+		pin03: { top: '40%', left: '50%' },
+		pin04: { top: '50%', left: '60%' },
+		pin05: { top: '60%', left: '70%' },
+		pin06: { top: '70%', left: '80%' },
+		pin07: { top: '80%', left: '90%' },
+		pin08: { top: '10%', left: '80%' },
+		pin09: { top: '20%', left: '70%' },
+		pin10: { top: '30%', left: '60%' },
+		pin11: { top: '40%', left: '50%' },
+		pin12: { top: '50%', left: '40%' },
+		pin13: { top: '60%', left: '30%' },
+		pin14: { top: '70%', left: '20%' },
+		pin15: { top: '80%', left: '10%' },
+	};
+
 	return (
-		<div className="pin-grid position-relative" style={{ minHeight: '500px' }}>
-			{Object.entries(pins).map(([pin, pinData], index) => {
-				const position = GPIO_POSITIONS[pin as keyof typeof GPIO_POSITIONS] || { x: 0, y: 0 };
-				
-				return (
-					<div
-						key={`select-${index}`}
-						className="position-absolute d-flex align-items-center"
-						style={{
-							left: `${position.x}px`,
-							top: `${position.y}px`,
-							width: '100px', // 固定宽度，确保所有编辑框大小一致
-						}}
-					>
-						{/* <div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
-							<label>GP{index}</label>
-						</div> */}
-						<CustomSelect
-							isClearable
-							isMulti={!isDisabled(pinData.action)}
-							options={groupedOptions}
-							isDisabled={isDisabled(pinData.action)}
-							getOptionLabel={getOptionLabel}
-							onChange={onChange(pin)}
-							value={getMultiValue(pinData)}
-							className="flex-grow-1"
-						/>
+		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '600px' }}>
+			{Object.entries(pins).map(([pin, pinData], index) => (
+				<div key={`select-${index}`} className="d-flex align-items-center" style={{ 
+					position: 'absolute', 
+					top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
+					left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
+					transform: 'translate(-50%, -50%)'
+				}}>
+					<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
+						<label>GP{index}</label>
 					</div>
-				);
-			})}
+					<CustomSelect
+						isClearable
+						isMulti={!isDisabled(pinData.action)}
+						options={groupedOptions}
+						isDisabled={isDisabled(pinData.action)}
+						getOptionLabel={getOptionLabel}
+						onChange={onChange(pin)}
+						value={getMultiValue(pinData)}
+					/>
+				</div>
+			))}
 		</div>
 	);
 });

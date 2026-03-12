@@ -275,7 +275,7 @@ const PinSelectList = memo(function PinSelectList({
 	const visiblePins = ['pin00', 'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06', 'pin07', 'pin08', 'pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin26', 'pin27', 'pin28', 'pin29'];
 
 	return (
-		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '500px' }}>
+		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '300px' }}>
 			{Object.entries(pins).map(([pin, pinData], index) => {
 				// 只显示需要的pin编辑框
 				if (!visiblePins.includes(pin)) return null;
@@ -285,7 +285,8 @@ const PinSelectList = memo(function PinSelectList({
 						position: 'absolute', 
 						top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
 						left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
-						transform: 'translate(0%, 0%)'
+						transform: 'translate(0%, 0%)',
+						zIndex: visiblePins.length - visiblePins.indexOf(pin)
 					}}>
 						<CustomSelect
 							isClearable={false}

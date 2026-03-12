@@ -257,16 +257,13 @@ const PinSelectList = memo(function PinSelectList({
 		pin06: { top: '60%', left: '50%' },
 		pin07: { top: '50%', left: '40%' },
 		pin08: { top: '60%', left: '40%' },
-
 		pin09: { top: '70%', left: '50%' },
 		pin10: { top: '70%', left: '40%' },
 		pin11: { top: '70%', left: '30%' },
-
 		pin12: { top: '50%', left: '30%' },
 		pin13: { top: '50%', left: '20%' },
 		pin14: { top: '50%', left: '10%' },
 		pin15: { top: '50%', left: '00%' },
-		
 		pin00: { top: '40%', left: '40%' },
 		pin26: { top: '40%', left: '30%' },
 		pin27: { top: '40%', left: '20%' },
@@ -288,13 +285,10 @@ const PinSelectList = memo(function PinSelectList({
 						position: 'absolute', 
 						top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
 						left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
-						transform: 'translate(-50%, -50%)'
+						transform: 'translate(0%, 0%)'
 					}}>
-						<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
-							<label>GP{index}</label>
-						</div>
 						<CustomSelect
-							isClearable
+							isClearable={false}
 							isMulti={!isDisabled(pinData.action)}
 							options={groupedOptions}
 							isDisabled={isDisabled(pinData.action)}

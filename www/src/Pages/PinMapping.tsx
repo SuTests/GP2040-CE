@@ -249,33 +249,33 @@ const PinSelectList = memo(function PinSelectList({
 
 	// 自定义按钮坐标配置
 	const buttonPositions = {
-		pin01: { top: '50%', left: '70%' },
-		pin02: { top: '60%', left: '70%' },
-		pin03: { top: '50%', left: '60%' },
-		pin04: { top: '60%', left: '60%' },
-		pin05: { top: '50%', left: '50%' },
-		pin06: { top: '60%', left: '50%' },
-		pin07: { top: '50%', left: '40%' },
-		pin08: { top: '60%', left: '40%' },
-		pin09: { top: '70%', left: '50%' },
-		pin10: { top: '70%', left: '40%' },
-		pin11: { top: '70%', left: '30%' },
-		pin12: { top: '50%', left: '30%' },
-		pin13: { top: '50%', left: '20%' },
-		pin14: { top: '50%', left: '10%' },
-		pin15: { top: '50%', left: '00%' },
-		pin00: { top: '40%', left: '40%' },
-		pin26: { top: '40%', left: '30%' },
-		pin27: { top: '40%', left: '20%' },
-		pin28: { top: '40%', left: '10%' },
-		pin29: { top: '40%', left: '00%' },
+		pin01: { top: '30%', left: '84%' },
+		pin02: { top: '60%', left: '84%' },
+		pin03: { top: '30%', left: '72%' },
+		pin04: { top: '60%', left: '72%' },
+		pin05: { top: '30%', left: '60%' },
+		pin06: { top: '60%', left: '60%' },
+		pin07: { top: '30%', left: '48%' },
+		pin08: { top: '60%', left: '48%' },
+		pin09: { top: '90%', left: '60%' },
+		pin10: { top: '90%', left: '48%' },
+		pin11: { top: '90%', left: '36%' },
+		pin12: { top: '30%', left: '36%' },
+		pin13: { top: '30%', left: '24%' },
+		pin14: { top: '30%', left: '12%' },
+		pin15: { top: '30%', left: '00%' },
+		pin00: { top: '00%', left: '48%' },
+		pin26: { top: '00%', left: '36%' },
+		pin27: { top: '00%', left: '24%' },
+		pin28: { top: '00%', left: '12%' },
+		pin29: { top: '00%', left: '00%' },
 	};
 
 	// 需要显示的pin列表
 	const visiblePins = ['pin00', 'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06', 'pin07', 'pin08', 'pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin26', 'pin27', 'pin28', 'pin29'];
 
 	return (
-		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '600px' }}>
+		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '200px' }}>
 			{Object.entries(pins).map(([pin, pinData], index) => {
 				// 只显示需要的pin编辑框
 				if (!visiblePins.includes(pin)) return null;

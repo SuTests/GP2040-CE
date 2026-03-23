@@ -146,7 +146,7 @@ const Navigation = () => {
 							value={buttonLabels.buttonLabelType}
 							onChange={updateButtonLabels}
 						>
-							{Object.keys(BUTTONS).map((b, i) => (
+							{['xinput', 'switch', 'ps4', 'ps3', 'gp2040', 'arcade', 'dinput'].map((b, i) => (
 								<option
 									key={`button-label-option-${i}`}
 									value={BUTTONS[b].value}

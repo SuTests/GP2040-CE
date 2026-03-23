@@ -15,7 +15,12 @@
 		transition:
 			border-color 0.15s ease-in-out,
 			box-shadow 0.15s ease-in-out;
-		padding: 0.375rem 0.75rem;
+		width: 40px;
+		height: 40px;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		&--is-disabled {
 			background-color: var(--bs-secondary-bg);
 		}
@@ -36,9 +41,16 @@
 }
 
 .react-select__value-container {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
 	.react-select__single-value,
 	.react-select__input-container {
 		color: inherit;
+		text-align: center;
+		margin: 0;
 	}
 	.react-select__multi-value {
 		background-color: var(--bs-secondary-bg);

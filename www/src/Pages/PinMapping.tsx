@@ -272,33 +272,34 @@ const PinSelectList = memo(function PinSelectList({
 	};
 
 	// 需要显示的pin列表
-	const visiblePins = ['pin00', 'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06', 'pin07', 'pin08', 'pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin26', 'pin27', 'pin28', 'pin29'];
+	// const visiblePins = ['pin00', 'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06', 'pin07', 'pin08', 'pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin26', 'pin27', 'pin28', 'pin29'];
+	const visiblePins = ['pin26', 'pin27', 'pin28', 'pin29', 'pin00', 'pin01', 'pin03', 'pin05', 'pin07', 'pin02', 'pin04', 'pin06', 'pin08', 'pin12', 'pin13', 'pin14', 'pin15', 'pin9', 'pin10', 'pin11'];
 
 	return (
 		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '300px' }}>
-			{Object.entries(pins).map(([pin, pinData], index) => {
-				// 只显示需要的pin编辑框
-				if (!visiblePins.includes(pin)) return null;
-				
-				return (
-					<div key={`select-${index}`} className="d-flex align-items-center" style={{ 
-						position: 'absolute', 
-						top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
-						left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
-						transform: 'translate(0%, 0%)'
-					}}>
-						<CustomSelect
-							isClearable={false}
-							isMulti={!isDisabled(pinData.action)}
-							options={groupedOptions}
-							isDisabled={isDisabled(pinData.action)}
-							getOptionLabel={getOptionLabel}
-							onChange={onChange(pin)}
-							value={getMultiValue(pinData)}
-						/>
-					</div>
-				);
-			})}
+			{visiblePins.map((pin, index) => {
+			const pinData = pins[pin];
+			if (!pinData) return null;
+			
+			return (
+				<div key={`select-${index}`} className="d-flex align-items-center" style={{ 
+					position: 'absolute', 
+					top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
+					left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
+					transform: 'translate(0%, 0%)'
+				}}>
+					<CustomSelect
+						isClearable={false}
+						isMulti={!isDisabled(pinData.action)}
+						options={groupedOptions}
+						isDisabled={isDisabled(pinData.action)}
+						getOptionLabel={getOptionLabel}
+						onChange={onChange(pin)}
+						value={getMultiValue(pinData)}
+					/>
+				</div>
+			);
+		})}
 		</div>
 	);
 });

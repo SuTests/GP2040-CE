@@ -23,6 +23,13 @@
 		&:hover {
 			border: var(--bs-border-width) solid var(--bs-border-color);
 		}
+		/* Hide dropdown indicator and separator */
+		& .react-select__indicator-separator {
+			display: none;
+		}
+		& .react-select__dropdown-indicator {
+			display: none;
+		}
 	}
 }
 

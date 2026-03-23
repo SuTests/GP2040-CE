@@ -532,6 +532,10 @@ const FormContext = ({ setButtonLabels, setKeyMappings }) => {
 	useEffect(() => {
 		async function fetchData() {
 			const options = await WebApi.getGamepadOptions(setLoading);
+			// Set default SOCD mode to Last Win (后输入优先) if not already set
+			if (options.socdMode === undefined || options.socdMode === 1) {
+				options.socdMode = 2;
+			}
 			setValues(options);
 			setButtonLabels({
 				swapTpShareLabels:

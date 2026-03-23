@@ -273,7 +273,7 @@ const PinSelectList = memo(function PinSelectList({
 
 	// 需要显示的pin列表
 	// const visiblePins = ['pin00', 'pin01', 'pin02', 'pin03', 'pin04', 'pin05', 'pin06', 'pin07', 'pin08', 'pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin26', 'pin27', 'pin28', 'pin29'];
-	const visiblePins = ['pin26', 'pin27', 'pin28', 'pin29', 'pin00', 'pin01', 'pin03', 'pin05', 'pin07', 'pin02', 'pin04', 'pin06', 'pin08', 'pin12', 'pin13', 'pin14', 'pin15', 'pin9', 'pin10', 'pin11'];
+	const visiblePins = ['pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin02', 'pin04', 'pin06', 'pin08', 'pin01', 'pin03', 'pin05', 'pin07', 'pin26', 'pin27', 'pin28', 'pin29', 'pin00'];
 
 	return (
 		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '300px' }}>

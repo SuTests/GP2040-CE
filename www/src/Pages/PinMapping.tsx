@@ -249,23 +249,23 @@ const PinSelectList = memo(function PinSelectList({
 
 	// 自定义按钮坐标配置
 	const buttonPositions = {
-		pin01: { top: '24%', left: '83%' },//LB
-		pin02: { top: '44%', left: '83%' },//LT
-		pin03: { top: '22%', left: '70%' },//RB
-		pin04: { top: '42%', left: '70%' },//RT
-		pin05: { top: '20%', left: '57%' },//Y
-		pin06: { top: '40%', left: '57%' },//B
-		pin07: { top: '30%', left: '46%' },//X
-		pin08: { top: '50%', left: '46%' },//A
-		pin09: { top: '85%', left: '54%' },//R3+3
-		pin10: { top: '90%', left: '42%' },//UP
-		pin11: { top: '85%', left: '30%' },//L3+2
-		pin12: { top: '40%', left: '35%' },//RIGHT
-		pin13: { top: '30%', left: '24%' },//DOWN
-		pin14: { top: '30%', left: '11%' },//LEFT
-		pin15: { top: '40%', left: '00%' },//+1
-		pin00: { top: '10%', left: '46%' },//+5
-		pin26: { top: '10%', left: '24%' },//+4
+		pin01: { top: '14%', left: '83%' },//LB
+		pin02: { top: '34%', left: '83%' },//LT
+		pin03: { top: '12%', left: '70%' },//RB
+		pin04: { top: '32%', left: '70%' },//RT
+		pin05: { top: '10%', left: '57%' },//Y
+		pin06: { top: '30%', left: '57%' },//B
+		pin07: { top: '20%', left: '46%' },//X
+		pin08: { top: '40%', left: '46%' },//A
+		pin09: { top: '75%', left: '54%' },//R3+3
+		pin10: { top: '80%', left: '42%' },//UP
+		pin11: { top: '75%', left: '30%' },//L3+2
+		pin12: { top: '30%', left: '35%' },//RIGHT
+		pin13: { top: '20%', left: '24%' },//DOWN
+		pin14: { top: '20%', left: '11%' },//LEFT
+		pin15: { top: '30%', left: '00%' },//+1
+		pin00: { top: '00%', left: '46%' },//+5
+		pin26: { top: '00%', left: '24%' },//+4
 	};
 
 	// 需要显示的pin列表

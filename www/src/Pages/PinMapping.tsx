@@ -215,7 +215,7 @@ const PinSelectList = memo(function PinSelectList({
 										option.type === 'customDpadMask'
 											? masks.customDpadMask ^ option.customDpadMask
 											: masks.customDpadMask,
-								}),
+									}),
 								{
 									action: BUTTON_ACTIONS.CUSTOM_BUTTON_COMBO,
 									customButtonMask: 0,
@@ -246,15 +246,88 @@ const PinSelectList = memo(function PinSelectList({
 		},
 		[buttonNames],
 	);
+
+	// // 自定义按钮坐标配置 V1
+	// const buttonPositions = {
+	// 	pin01: { top: '14%', left: '81%' },//LB
+	// 	pin02: { top: '34%', left: '81%' },//LT
+	// 	pin03: { top: '12%', left: '69%' },//RB
+	// 	pin04: { top: '32%', left: '69%' },//RT
+	// 	pin05: { top: '10%', left: '57%' },//Y
+	// 	pin06: { top: '30%', left: '57%' },//B
+	// 	pin07: { top: '20%', left: '46%' },//X
+	// 	pin08: { top: '40%', left: '46%' },//A
+	// 	pin09: { top: '75%', left: '52%' },//R3
+	// 	pin10: { top: '80%', left: '40%' },//UP
+	// 	pin11: { top: '75%', left: '28%' },//L3
+	// 	pin12: { top: '30%', left: '35%' },//RIGHT
+	// 	pin13: { top: '20%', left: '24%' },//DOWN
+	// 	pin14: { top: '20%', left: '12%' },//LEFT
+	// 	pin15: { top: '25%', left: '00%' },//UPL
+	// 	pin00: { top: '00%', left: '46%' },//腰子R
+	// 	pin26: { top: '00%', left: '24%' },//腰子L
+	// };
+	// const visiblePins = ['pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin02', 'pin04', 'pin06', 'pin08', 'pin01', 'pin03', 'pin05', 'pin07', 'pin26', 'pin00'];
+
+	// 自定义按钮坐标配置 V2
+	const buttonPositions = {
+		pin01: { top: '20%', left: '46%' },//X
+		pin02: { top: '10%', left: '57%' },//Y
+		pin03: { top: '12%', left: '69%' },//RB
+		pin04: { top: '14%', left: '81%' },//LB
+		pin05: { top: '34%', left: '81%' },//LT
+		pin06: { top: '32%', left: '69%' },//RT
+		pin07: { top: '30%', left: '57%' },//B
+		pin08: { top: '40%', left: '46%' },//A
+		pin09: { top: '30%', left: '35%' },//RIGHT
+		pin10: { top: '20%', left: '24%' },//DOWN
+		pin11: { top: '20%', left: '12%' },//LEFT
+		pin12: { top: '25%', left: '00%' },//UPL
+		pin16: { top: '00%', left: '24%' },//腰子L
+		pin17: { top: '00%', left: '46%' },//腰子R
+		pin18: { top: '75%', left: '28%' },//L3
+		pin19: { top: '80%', left: '40%' },//UP
+		pin20: { top: '75%', left: '52%' },//R3
+	};
+	const visiblePins = ['pin20', 'pin19', 'pin18', 'pin12', 'pin11', 'pin10', 'pin09', 'pin08', 'pin07', 'pin06', 'pin05', 'pin04', 'pin03', 'pin02', 'pin01', 'pin16', 'pin17'];
+
+	// // 自定义按钮坐标配置 V3
+	// const buttonPositions = {
+	// 	pin01: { top: '20%', left: '46%' },//X
+	// 	pin02: { top: '10%', left: '57%' },//Y
+	// 	pin03: { top: '12%', left: '69%' },//RB
+	// 	pin04: { top: '14%', left: '81%' },//LB
+	// 	pin05: { top: '34%', left: '81%' },//LT
+	// 	pin06: { top: '32%', left: '69%' },//RT
+	// 	pin07: { top: '30%', left: '57%' },//B
+	// 	pin08: { top: '40%', left: '46%' },//A
+	// 	pin09: { top: '75%', left: '52%' },//R3
+	// 	pin10: { top: '80%', left: '40%' },//UP
+	// 	pin11: { top: '75%', left: '28%' },//L3
+	// 	pin12: { top: '30%', left: '35%' },//RIGHT
+	// 	pin13: { top: '20%', left: '24%' },//DOWN
+	// 	pin14: { top: '20%', left: '12%' },//LEFT
+	// 	pin15: { top: '25%', left: '00%' },//UPL
+	// 	pin00: { top: '00%', left: '46%' },//腰子R
+	// 	pin26: { top: '00%', left: '24%' },//腰子L
+	// };
+	// const visiblePins = ['pin09', 'pin10', 'pin11', 'pin12', 'pin13', 'pin14', 'pin15', 'pin08', 'pin07', 'pin06', 'pin05', 'pin04', 'pin03', 'pin02', 'pin01', 'pin26', 'pin00'];
+
 	return (
-		<div className="pin-grid gap-3 mt-2">
-			{Object.entries(pins).map(([pin, pinData], index) => (
-				<div key={`select-${index}`} className="d-flex align-items-center">
-					<div className="d-flex flex-shrink-0" style={{ width: '3.5rem' }}>
-						<label>GP{index}</label>
-					</div>
+		<div className="pin-container gap-3 mt-2" style={{ position: 'relative', height: '500px' }}>
+			{visiblePins.map((pin, index) => {
+			const pinData = pins[pin];
+			if (!pinData) return null;
+			
+			return (
+				<div key={`select-${index}`} className="d-flex align-items-center" style={{ 
+					position: 'absolute', 
+					top: buttonPositions[pin as keyof typeof buttonPositions]?.top || '0%', 
+					left: buttonPositions[pin as keyof typeof buttonPositions]?.left || '0%',
+					transform: 'translate(0%, 0%)'
+				}}>
 					<CustomSelect
-						isClearable
+						isClearable={false}
 						isMulti={!isDisabled(pinData.action)}
 						options={groupedOptions}
 						isDisabled={isDisabled(pinData.action)}
@@ -263,7 +336,8 @@ const PinSelectList = memo(function PinSelectList({
 						value={getMultiValue(pinData)}
 					/>
 				</div>
-			))}
+			);
+		})}
 		</div>
 	);
 });

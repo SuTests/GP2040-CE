@@ -11,9 +11,16 @@
 		background-color: transparent;
 		line-height: var(--bs-select-line-height);
 		border: var(--bs-border-width) solid var(--bs-border-color);
+		border-radius: 50%;
 		transition:
 			border-color 0.15s ease-in-out,
 			box-shadow 0.15s ease-in-out;
+		width: 90px;
+		height: 90px;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		&--is-disabled {
 			background-color: var(--bs-secondary-bg);
 		}
@@ -23,13 +30,36 @@
 		&:hover {
 			border: var(--bs-border-width) solid var(--bs-border-color);
 		}
+		/* Hide dropdown indicator and separator */
+		& .react-select__indicator-separator {
+			display: none;
+		}
+		& .react-select__dropdown-indicator {
+			display: none;
+		}
 	}
 }
 
 .react-select__value-container {
-	.react-select__single-value,
+	flex: 1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	flex-wrap: wrap;
+	gap: 4px;
+	.react-select__single-value {
+		color: inherit;
+		text-align: center;
+		margin: 0;
+	}
 	.react-select__input-container {
 		color: inherit;
+		text-align: center;
+		margin: 0;
+		flex: 0 0 auto;
+		width: 0;
+		min-width: 0;
 	}
 	.react-select__multi-value {
 		background-color: var(--bs-secondary-bg);
